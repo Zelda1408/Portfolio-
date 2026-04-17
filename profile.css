@@ -1,0 +1,62 @@
+body {
+  background: #0a0a0a;
+  color: #e6e6e6;
+  font-family: Trebuchet MS,Sans-Serif;
+}
+
+h1,h2{
+  color:#00ffcc;
+  text-shadow: 0 0 10px #00ffcc;
+}
+
+img {
+  border-radius: 50%;
+  border: 3px solid #00ffcc;
+  box-shadow: 0 0 20px #00ffcc;
+  transition: 0.3s;
+}
+
+img:hover {
+  transform: scale(1.1) rotate(2deg);
+}
+
+body {
+  background: radial-gradient(circle, #000 40%, #001f1f 100%);
+}
+.card {
+  background: #111;
+  border: 1px solid #00ffcc;
+  box-shadow: 0 0 10px #00ffcc;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px red;
+}
+
+.glow {
+  animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px #00ffcc;
+  }
+  to {
+    text-shadow: 0 0 20px #00ffcc;
+  }
+}
+.fill {
+  width: 0;
+  animation: load 2s forwards;
+}
+
+@keyframes load {
+  to {
+    width: 80%; /* adjust per skill */
+  }
+}
+body {
+  background: url("Bg.jpeg") no-repeat center center/cover;
+}

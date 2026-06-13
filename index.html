@@ -3,121 +3,298 @@
 <head>
   <title>Rituraj Swain Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="profile.css">
 
   <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      margin: 0;
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       background: #0f0f0f;
       color: white;
+      scroll-behavior: smooth;
     }
 
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(26,26,26,0.95);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 14px 0;
+      border-bottom: 1px solid #222;
+    }
+
+    nav a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    nav a:hover, nav a.active {
+      color: #00ffcc;
+    }
+
+    /* HEADER */
     header {
       text-align: center;
-      padding: 30px;
+      padding: 120px 30px 60px;
       background: #1a1a1a;
+    }
+
+    header img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 3px solid #00ffcc;
+      margin-bottom: 20px;
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+
+    header img:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 24px #00ffcc88;
     }
 
     h1 {
       color: #00ffcc;
-      margin: 10px 0;
+      font-size: 2.4em;
+      margin: 10px 0 6px;
     }
 
+    .tagline {
+      color: #888;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #ccc;
+      font-size: 1em;
+    }
+
+    #typed-text::after {
+      content: '|';
+      animation: blink 0.7s infinite;
+      color: #00ffcc;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* SECTIONS */
     section {
-      padding: 20px;
+      padding: 60px 24px;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     h2 {
       color: #00ffcc;
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      border-left: 4px solid #00ffcc;
+      padding-left: 12px;
     }
 
+    /* SKILLS */
     .skill {
-      margin: 10px 0;
+      margin: 14px 0;
+    }
+
+    .skill-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-size: 0.95em;
+      color: #ddd;
     }
 
     .bar {
       height: 10px;
       background: #333;
       border-radius: 5px;
+      overflow: hidden;
     }
 
     .fill {
       height: 10px;
-      background: #00ffcc;
+      background: linear-gradient(90deg, #00ffcc, #00aaff);
       border-radius: 5px;
+      width: 0%;
+      transition: width 1.2s ease;
     }
 
+    /* CARDS */
     .card {
       background: #1a1a1a;
-      padding: 15px;
-      margin-top: 10px;
-      border-radius: 10px;
+      padding: 20px;
+      margin-top: 14px;
+      border-radius: 12px;
+      border: 1px solid #2a2a2a;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      cursor: default;
     }
 
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: #00ffcc55;
+      box-shadow: 0 8px 24px #00ffcc22;
+    }
+
+    .card h3 {
+      color: #00ffcc;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      color: #aaa;
+      font-size: 0.93em;
+      line-height: 1.5;
+    }
+
+    /* CONTACT */
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 10px 0;
+      font-size: 0.95em;
+      color: #ccc;
+    }
+
+    .contact-item span.label {
+      color: #00ffcc;
+      font-weight: bold;
+      min-width: 70px;
+    }
+
+    /* FOOTER */
     footer {
       text-align: center;
-      padding: 15px;
+      padding: 20px;
       background: #1a1a1a;
-      margin-top: 20px;
+      color: #555;
+      font-size: 0.85em;
+      border-top: 1px solid #222;
+    }
+
+    /* BACK TO TOP */
+    #back-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #00ffcc;
+      color: #0f0f0f;
+      border: none;
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      font-size: 18px;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s, transform 0.3s;
+      z-index: 999;
+    }
+
+    #back-top.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #back-top:hover {
+      background: #00ddaa;
     }
   </style>
 </head>
 
 <body>
 
+<nav>
+  <a href="#about">About</a>
+  <a href="#skills">Skills</a>
+  <a href="#projects">Projects</a>
+  <a href="#experience">Experience</a>
+  <a href="#contact">Contact</a>
+</nav>
+
 <header>
+  <img src="Profile.webp" alt="Rituraj">
   <h1 class="glow">Rituraj Swain</h1>
-  <p style="color:#888; font-style: italic;">
-  Code. Chaos. Creation.
-</p>
-  <img src="Profile.webp" alt="Rituraj" style="width:120px; height:120px; border-radius:50%;">
-  <p>Java SDET | ML Enthusiast | Developer</p>
+  <p class="tagline">Code. Chaos. Creation.</p>
+  <p class="subtitle"><span id="typed-text"></span></p>
 </header>
 
-<section>
-  <h2><strong>About Me</strong></h2>
-  <p>
+<section id="about">
+  <h2>About Me</h2>
+  <p style="line-height:1.8; color:#ccc;">
     I am a technology-driven individual passionate about solving real-world problems through code.
     I enjoy building efficient and scalable solutions, with a strong foundation in software development and testing.
     My expertise spans Java, Python, web technologies, and machine learning.
   </p>
 </section>
 
-<section>
-  <h2><strong>Skills</strong></h2>
+<section id="skills">
+  <h2>Skills</h2>
 
-  <div class="skill">Java
-    <div class="bar"><div class="fill" style="width:80%"></div></div>
+  <div class="skill">
+    <div class="skill-label"><span>Java</span><span>80%</span></div>
+    <div class="bar"><div class="fill" data-width="80"></div></div>
   </div>
 
-  <div class="skill">Python
-    <div class="bar"><div class="fill" style="width:90%"></div></div>
+  <div class="skill">
+    <div class="skill-label"><span>Python</span><span>90%</span></div>
+    <div class="bar"><div class="fill" data-width="90"></div></div>
   </div>
 
-  <div class="skill">HTML/CSS
-    <div class="bar"><div class="fill" style="width:70%"></div></div>
+  <div class="skill">
+    <div class="skill-label"><span>HTML/CSS</span><span>70%</span></div>
+    <div class="bar"><div class="fill" data-width="70"></div></div>
   </div>
 
-  <div class="skill">JavaScript
-    <div class="bar"><div class="fill" style="width:65%"></div></div>
+  <div class="skill">
+    <div class="skill-label"><span>JavaScript</span><span>65%</span></div>
+    <div class="bar"><div class="fill" data-width="65"></div></div>
   </div>
 
-  <div class="skill">Selenium & Testing
-    <div class="bar"><div class="fill" style="width:85%"></div></div>
+  <div class="skill">
+    <div class="skill-label"><span>Selenium & Testing</span><span>85%</span></div>
+    <div class="bar"><div class="fill" data-width="85"></div></div>
   </div>
 
-  <div class="skill">Machine Learning
-    <div class="bar"><div class="fill" style="width:85%"></div></div>
+  <div class="skill">
+    <div class="skill-label"><span>Machine Learning</span><span>85%</span></div>
+    <div class="bar"><div class="fill" data-width="85"></div></div>
   </div>
 
-  <div class="skill">Playwright
-    <div class="bar"><div class="fill" style="width:80%"></div></div>
+  <div class="skill">
+    <div class="skill-label"><span>Playwright</span><span>80%</span></div>
+    <div class="bar"><div class="fill" data-width="80"></div></div>
   </div>
 
 </section>
 
-<section>
-  <h2><strong>Projects</strong></h2>
+<section id="projects">
+  <h2>Projects</h2>
 
   <div class="card">
     <h3>Energy Consumption Prediction</h3>
@@ -136,32 +313,79 @@
 
 </section>
 
-<section>
-  <h2><strong>Experience</strong></h2>
-  <p>
-    Worked as ML intern at CodSoft,
-    where I solved real-world
-    scenarios using various ML
-    techniques such as Linear
-    Regression, Random Forest, 
-    K-means, etc. With the help of 
-    these algorithms I was able to 
-    obtain higher accuracy and 
-    precision with less bias.
-  </p>
+<section id="experience">
+  <h2>Experience</h2>
+  <div class="card">
+    <h3>ML Intern — CodSoft</h3>
+    <p>
+      Solved real-world scenarios using various ML techniques such as Linear Regression,
+      Random Forest, K-means, and more. Achieved higher accuracy and precision with reduced bias
+      across multiple prediction tasks.
+    </p>
+  </div>
 </section>
 
-<section>
-  <p><strong>Contact: </strong> 8688963953
-  <p><strong>Email: </strong>
-    riturajswain30@gmail.com</p>
-
-  </p>
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="contact-item">
+    <span class="label">Phone</span>
+    <span>8688963953</span>
+  </div>
+  <div class="contact-item">
+    <span class="label">Email</span>
+    <a href="mailto:riturajswain30@gmail.com" style="color:#00ffcc; text-decoration:none;">riturajswain30@gmail.com</a>
+  </div>
 </section>
 
 <footer>
   <p>© 2026 Rituraj Swain</p>
 </footer>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+  const typed = document.getElementById('typed-text');
+  const phrases = ['Java SDET', 'ML Enthusiast', 'Developer', 'Test Automation Engineer'];
+  let pi = 0, ci = 0, deleting = false;
+
+  function type() {
+    const phrase = phrases[pi];
+    if (!deleting) {
+      typed.textContent = phrase.slice(0, ++ci);
+      if (ci === phrase.length) { deleting = true; setTimeout(type, 1800); return; }
+    } else {
+      typed.textContent = phrase.slice(0, --ci);
+      if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; }
+    }
+    setTimeout(type, deleting ? 60 : 100);
+  }
+  type();
+
+  const sections = document.querySelectorAll('section');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        const fills = entry.target.querySelectorAll('.fill');
+        fills.forEach(f => { f.style.width = f.dataset.width + '%'; });
+      }
+    });
+  }, { threshold: 0.15 });
+  sections.forEach(s => observer.observe(s));
+
+  const navLinks = document.querySelectorAll('nav a');
+  const sectionEls = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sectionEls.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+    document.getElementById('back-top').classList.toggle('show', window.scrollY > 300);
+  });
+</script>
 
 </body>
 </html>

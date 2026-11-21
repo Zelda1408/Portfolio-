@@ -47,16 +47,6 @@ body {
     text-shadow: 0 0 20px #00ffcc;
   }
 }
-.fill {
-  width: 0;
-  animation: load 2s forwards;
-}
-
-@keyframes load {
-  to {
-    width: 80%; /* adjust per skill */
-  }
-}
 body {
   background: url("Bg.jpeg") no-repeat center center/cover;
 }

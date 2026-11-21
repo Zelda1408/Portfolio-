@@ -116,31 +116,33 @@
     }
 
     /* SKILLS */
-    .skill {
-      margin: 14px 0;
+    .skill-groups {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
     }
 
-    .skill-label {
+    .skill-group {
+      margin-top: 0;
+    }
+
+    .skill-group h3 {
+      margin-bottom: 14px;
+    }
+
+    .skill-tags {
       display: flex;
-      justify-content: space-between;
-      margin-bottom: 6px;
-      font-size: 0.95em;
+      flex-wrap: wrap;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .skill-tags li {
+      padding: 7px 10px;
+      border: 1px solid #333;
+      border-radius: 999px;
       color: #ddd;
-    }
-
-    .bar {
-      height: 10px;
-      background: #333;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-
-    .fill {
-      height: 10px;
-      background: linear-gradient(90deg, #00ffcc, #00aaff);
-      border-radius: 5px;
-      width: 0%;
-      transition: width 1.2s ease;
+      font-size: 0.9em;
     }
 
     /* CARDS */
@@ -248,69 +250,52 @@
 <section id="about">
   <h2>About Me</h2>
   <p style="line-height:1.8; color:#ccc;">
-    I am a technology-driven individual passionate about solving real-world problems through code.
-    I enjoy building efficient and scalable solutions, with a strong foundation in software development and testing.
-    My expertise spans Java, Python, web technologies, and machine learning.
+    I am a software engineer and QA professional passionate about building reliable applications and solving real-world problems through technology. I specialize in Java, Python, web development, and machine learning, with hands-on experience in test automation and scalable software solutions. I enjoy translating complex requirements into efficient, maintainable, and high-quality systems.
   </p>
 </section>
 
 <section id="skills">
   <h2>Skills</h2>
+  <div class="skill-groups">
+    <article class="card skill-group">
+      <h3>Programming &amp; Web</h3>
+      <ul class="skill-tags" aria-label="Programming and web skills">
+        <li>Java</li>
+        <li>Python</li>
+        <li>JavaScript</li>
+        <li>TypeScript</li>
+        <li>HTML &amp; CSS</li>
+      </ul>
+    </article>
 
-  <div class="skill">
-    <div class="skill-label"><span>Java</span><span>80%</span></div>
-    <div class="bar"><div class="fill" data-width="80"></div></div>
+    <article class="card skill-group">
+      <h3>Test Automation</h3>
+      <ul class="skill-tags" aria-label="Test automation skills">
+        <li>Selenium</li>
+        <li>Playwright</li>
+        <li>REST Assured</li>
+        <li>TestNG</li>
+        <li>API Testing</li>
+        <li>Agile Testing</li>
+      </ul>
+    </article>
+
+    <article class="card skill-group">
+      <h3>Data &amp; Machine Learning</h3>
+      <ul class="skill-tags" aria-label="Data and machine learning skills">
+        <li>SQL</li>
+        <li>Machine Learning</li>
+        <li>Postgres</li>
+        <li>Tableau</li>
+        <li>Microsoft Excel</li>
+      </ul>
+    </article>
   </div>
-
-  <div class="skill">
-    <div class="skill-label"><span>Python</span><span>90%</span></div>
-    <div class="bar"><div class="fill" data-width="90"></div></div>
-  </div>
-
-  <div class="skill">
-    <div class="skill-label"><span>HTML/CSS</span><span>70%</span></div>
-    <div class="bar"><div class="fill" data-width="70"></div></div>
-  </div>
-
-  <div class="skill">
-    <div class="skill-label"><span>JavaScript</span><span>65%</span></div>
-    <div class="bar"><div class="fill" data-width="65"></div></div>
-  </div>
-
-  <div class="skill">
-    <div class="skill-label"><span>Selenium & Testing</span><span>85%</span></div>
-    <div class="bar"><div class="fill" data-width="85"></div></div>
-  </div>
-
-  <div class="skill">
-    <div class="skill-label"><span>Machine Learning</span><span>85%</span></div>
-    <div class="bar"><div class="fill" data-width="85"></div></div>
-  </div>
-
-  <div class="skill">
-    <div class="skill-label"><span>Playwright</span><span>80%</span></div>
-    <div class="bar"><div class="fill" data-width="80"></div></div>
-  </div>
-
-  <div class="skill">
-    <div class="skill-label"><span>TypeScript</span><span>80%</span></div>
-    <div class="bar"><div class="fill" data-width="80"></div></div>
-  </div>
-
-  <div class="skill">
-    <div class="skill-label"><span>SQL</span><span>85%</span></div>
-    <div class="bar"><div class="fill" data-width="85"></div></div>
-  </div>
-
-  <div class="skill">
-    <div class="skill-label"><span>Agile Testing</span><span>80%</span></div>
-    <div class="bar"><div class="fill" data-width="80"></div></div>
-  </div>
-
 </section>
 
 <section id="projects">
   <h2>Projects</h2>
+
 
   <div class="card">
     <h3>Energy Consumption Prediction</h3>
@@ -362,11 +347,7 @@
 <section id="contact">
   <h2>Contact</h2>
   <div class="contact-item">
-    <span class="label">Phone</span>
-    <span>8688963953</span>
-  </div>
-  <div class="contact-item">
-    <span class="label">Email</span>
+    <span class="label">Email:</span>
     <a href="mailto:riturajswain30@gmail.com" style="color:#00ffcc; text-decoration:none;">riturajswain30@gmail.com</a>
   </div>
 
@@ -437,8 +418,6 @@
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        const fills = entry.target.querySelectorAll('.fill');
-        fills.forEach(f => { f.style.width = f.dataset.width + '%'; });
       }
     });
   }, { threshold: 0.15 });
